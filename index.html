@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny's Coding Notes | Learning Frontend</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="100">
+
+    <!-- 導航列 -->
+    <nav id="mainNav" class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">BENNY<span class="text-white">.LEARNING</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="fas fa-bars text-white"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#home">學習筆記</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">練習作品</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#demo">API 實驗</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">留言給我</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-section d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <span class="badge badge-custom rounded-pill mb-3 border border-light text-light px-3 py-2">👋 Hello, World!</span>
+                    <h1 class="hero-title">
+                        正在努力學習 <br>
+                        <span class="gradient-text">前端開發</span> 的新手。
+                    </h1>
+                    <p class="lead text-muted mb-5 pe-lg-5">
+                        我是 Benny，一名剛踏入程式世界的初學者。這裡記錄了我學習 HTML, CSS 和 JavaScript 的過程，以及各種充滿 Bug 但很有趣的練習作品。
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#portfolio" class="btn btn-primary-glow">看看我的練習</a>
+                        <a href="#contact" class="btn btn-outline-light rounded-3 px-4 py-2 fw-bold" style="border: 2px solid rgba(255,255,255,0.2);">一起學習？</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 mt-5 mt-lg-0 animate__animated animate__fadeInRight">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="hero-stats-box mb-3">
+                                <h2 class="counter text-gradient display-5 fw-bold" data-target="3">0</h2>
+                                <p class="small text-muted mb-0">Major Projects</p>
+                            </div>
+                            <div class="hero-stats-box">
+                                <h2 class="counter text-gradient display-5 fw-bold" data-target="150">0</h2>
+                                <p class="small text-muted mb-0">Commits Pushed</p>
+                            </div>
+                        </div>
+                        <div class="col-6 mt-4">
+                            <div class="hero-stats-box mb-3">
+                                <h2 class="counter text-gradient display-5 fw-bold" data-target="99">0</h2>
+                                <p class="small text-muted mb-0">Bugs Fixed</p>
+                            </div>
+                            <div class="hero-stats-box bg-transparent border-0 d-flex align-items-center">
+                                <div class="text-end w-100 opacity-75 text-muted">
+                                    <i class="fas fa-code fa-2x mb-2 text-white"></i>
+                                    <div class="small">Coding every day...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5">
+        <div class="container py-5">
+            <div class="d-flex justify-content-between align-items-end mb-5">
+                <div>
+                    <h2 class="display-5 fw-bold mb-2 text-white">My Projects</h2>
+                    <p class="text-muted mb-0">這是我目前正在開發或維護的實戰專案</p>
+                </div>
+                <div class="filter-btns d-none d-md-block">
+                    <button class="btn active" data-filter="all">All</button>
+                    <button class="btn" data-filter="app">App</button>
+                    <button class="btn" data-filter="web">Web/Script</button>
+                </div>
+            </div>
+
+            <!-- Mobile Filter Dropdown (Optional) -->
+            <div class="d-md-none mb-4">
+                <select class="form-select bg-dark text-white border-secondary" id="mobile-filter">
+                    <option value="all">顯示全部</option>
+                    <option value="app">App 開發</option>
+                    <option value="web">Web 與腳本</option>
+                </select>
+            </div>
+            
+            <div class="row g-4 portfolio-grid">
+                <!-- Project 1: Pulse -->
+                <div class="col-md-6 col-lg-4 portfolio-item app">
+                    <div class="glass-card portfolio-card h-100">
+                        <div class="position-relative d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #0f9b0f 0%, #000000 100%);">
+                            <i class="fas fa-music fa-4x text-white opacity-50"></i>
+                            <div class="position-absolute bottom-0 start-0 p-3 w-100" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                                <span class="badge bg-success">Kotlin</span>
+                                <span class="badge bg-primary ms-1">Compose</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-2 text-white">Pulse Music Player</h5>
+                            <p class="text-muted small">
+                                一款現代化的 Android 音樂播放器，採用 Material Design 3 設計。支援動態調色盤、波形可視化與歌詞同步功能。
+                            </p>
+                            <div class="mt-3">
+                                <small class="text-white-50"><i class="fas fa-layer-group me-1"></i> Clean Architecture</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2: YouTube Cleaner -->
+                <div class="col-md-6 col-lg-4 portfolio-item web">
+                    <div class="glass-card portfolio-card h-100">
+                        <div class="position-relative">
+                            <img src="img/yt-cleaner.png" class="w-100" style="height: 200px; object-fit: cover;" alt="YouTube Cleaner">
+                             <div class="position-absolute bottom-0 start-0 p-3 w-100" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                                <span class="badge bg-warning text-dark">JavaScript</span>
+                                <span class="badge bg-info ms-1">Userscript</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-2 text-white">YouTube Homepage Cleaner</h5>
+                            <p class="text-muted small">
+                                瀏覽器腳本 (Userscript)，專注於隱藏 Shorts、過濾廣告與清理版面。擁有超過 15 種自訂規則，還給用戶純淨的瀏覽體驗。
+                            </p>
+                            <div class="mt-3">
+                                <small class="text-white-50"><i class="fas fa-star me-1"></i> Open Source</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3: AI Note Assistant -->
+                <div class="col-md-6 col-lg-4 portfolio-item web">
+                    <div class="glass-card portfolio-card h-100">
+                        <div class="position-relative d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #ea2845 0%, #2f2f2f 100%);">
+                            <i class="fas fa-brain fa-4x text-white opacity-50"></i>
+                             <div class="position-absolute bottom-0 start-0 p-3 w-100" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+                                <span class="badge bg-danger">NestJS</span>
+                                <span class="badge bg-white text-dark ms-1">Next.js</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-2 text-white">AI 筆記助手 (開發中)</h5>
+                            <p class="text-muted small">
+                                全端開發練習專案。後端使用 NestJS 建構高效能 API，前端採用 Next.js。目標是打造一個結合 AI 輔助寫作的智慧筆記本。
+                            </p>
+                            <div class="mt-3">
+                                <small class="text-white-50"><i class="fas fa-server me-1"></i> Full Stack</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section (API) -->
+    <section id="demo" class="py-5">
+        <div class="container py-5">
+            <div class="glass-card p-4 p-md-5 rounded-4">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 mb-4 mb-lg-0">
+                        <span class="text-info fw-bold text-uppercase small ls-1">Live Updates</span>
+                        <h2 class="fw-bold mb-3 mt-2 text-white">專案開發日誌</h2>
+                        <p class="text-muted mb-4">這是我練習串接 API 的實驗區塊。點擊下方按鈕，會模擬抓取這些專案最新的 Commit 與更新紀錄。</p>
+                        <button id="btn-fetch" class="btn btn-primary-glow">
+                            <i class="fas fa-sync-alt me-2" id="fetch-icon"></i>
+                            <span id="btn-text">抓取更新紀錄</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-7">
+                        <div id="api-result" class="rounded-3 p-3" style="min-height: 250px;">
+                            <div class="d-flex align-items-center justify-content-center h-100 text-muted opacity-75 flex-column">
+                                <i class="fas fa-terminal fa-3x mb-3 text-white"></i>
+                                <span>等待請求中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 position-relative">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="display-6 fw-bold text-white">一起交流嗎？</h2>
+                    <p class="text-muted">如果你也是初學者，或者前輩有建議想給我，歡迎留言！</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="glass-card p-4 p-md-5 rounded-4">
+                        <form id="contact-form" novalidate>
+                            <div class="mb-4">
+                                <label class="form-label small text-uppercase text-muted fw-bold">怎麼稱呼您</label>
+                                <input type="text" class="form-control" placeholder="您的名字" required>
+                                <div class="invalid-feedback">請告訴我您的名字</div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small text-uppercase text-muted fw-bold">電子郵件</label>
+                                <input type="email" class="form-control" placeholder="email@example.com" required>
+                                <div class="invalid-feedback">請輸入有效的 Email</div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small text-uppercase text-muted fw-bold">想對我說的話</label>
+                                <textarea class="form-control" rows="4" placeholder="例如：推薦我一個學習資源..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary-glow w-100" id="submit-btn">發送訊息</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 mt-5 border-top border-secondary" style="border-color: rgba(255,255,255,0.1) !important;">
+        <div class="container text-center">
+            <p class="mb-0 small text-muted">© 2026 Benny. Learning by doing.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

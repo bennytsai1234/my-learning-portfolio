@@ -1,0 +1,251 @@
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+    --bg-dark: #0f172a;
+    --bg-darker: #020617;
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+    --glass-bg: rgba(255, 255, 255, 0.08); /* 稍微調亮背景 */
+    --glass-border: rgba(255, 255, 255, 0.15); /* 增強邊框對比 */
+    --text-main: #ffffff;
+    --text-muted: #d1d5db; /* 淺灰色，在深色背景更清楚 */
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Override Bootstrap text-muted */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Background Ambient Glows */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.15;
+}
+body::before {
+    top: -100px;
+    left: -100px;
+    background: #6366f1;
+    animation: float 10s infinite ease-in-out;
+}
+body::after {
+    bottom: -100px;
+    right: -100px;
+    background: #a855f7;
+    animation: float 15s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 50px); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-darker);
+}
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    color: var(--text-main);
+}
+
+/* Navbar Redesign - Floating Capsule */
+.navbar {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    opacity: 0.8;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #fff !important;
+    opacity: 1;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gradient);
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title {
+    font-size: 3.5rem; /* 稍微縮小標題 */
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.gradient-text {
+    background: var(--secondary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-stats-box {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.3s;
+}
+.hero-stats-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.12);
+}
+
+/* Portfolio Section */
+.filter-btns .btn {
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+}
+
+.filter-btns .btn:hover, .filter-btns .btn.active {
+    background: var(--primary-gradient);
+    color: white;
+    border-color: transparent;
+}
+
+.portfolio-card {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.portfolio-card img {
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(0.9); /* 提高亮度 */
+    transition: 0.4s;
+}
+
+.portfolio-card:hover img {
+    filter: brightness(1.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* API Demo Section */
+#api-result {
+    border-left: 3px solid #6366f1;
+    background: rgba(0,0,0,0.4); /* 深一點的背景增加文字對比 */
+}
+
+/* Form Styling */
+.form-control {
+    background: rgba(255,255,255,0.1); /* 增加不透明度 */
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.15);
+    border-color: #6366f1;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+.form-control::placeholder {
+    color: rgba(255,255,255,0.5); /* 增加 placeholder 可讀性 */
+}
+
+.btn-primary-glow {
+    background: var(--primary-gradient);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s;
+}
+
+.btn-primary-glow:hover {
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Helper Classes */
+.text-gradient {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
