@@ -1,8 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Navbar Scroll Effect
-    const navbar = document.querySelector('.navbar');
+    const cards = document.querySelectorAll('.glass-card');
     
+    if (cards.length > 0) {
+        document.body.addEventListener('mousemove', (e) => {
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    }
+
+    const navbar = document.querySelector('.navbar');
     function updateNavbar() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -10,12 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.remove('scrolled');
         }
     }
-    
     window.addEventListener('scroll', updateNavbar);
-    // Initial check
     updateNavbar();
 
-    // 2. Counter Animation
     let counted = false;
     const statsBox = document.querySelector('.hero-stats-box');
     
@@ -46,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Portfolio Filter
     const filterBtns = document.querySelectorAll('.filter-btns .btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
 
@@ -54,39 +63,30 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const filter = btn.getAttribute('data-filter');
             
-            // Update Active UI
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             portfolioItems.forEach(item => {
+                const parent = item.closest('.bento-item');
+                const target = parent || item;
+
                 if (filter === 'all' || item.classList.contains(filter)) {
-                    item.style.display = ''; // Reset display to CSS default (e.g., block/flex)
-                    // Add fade-in animation logic if desired, or simpler CSS transition
-                    item.style.opacity = '0';
-                    setTimeout(() => item.style.opacity = '1', 50);
+                    target.style.display = ''; 
+                    target.style.opacity = '0';
+                    target.style.transform = 'translateY(10px)';
+                    target.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    
+                    setTimeout(() => {
+                        target.style.opacity = '1';
+                        target.style.transform = 'translateY(0)';
+                    }, 50);
                 } else {
-                    item.style.display = 'none';
+                    target.style.display = 'none';
                 }
             });
         });
     });
 
-    // Mobile Filter
-    const mobileFilter = document.getElementById('mobile-filter');
-    if (mobileFilter) {
-        mobileFilter.addEventListener('change', (e) => {
-            const filter = e.target.value;
-            portfolioItems.forEach(item => {
-                if (filter === 'all' || item.classList.contains(filter)) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    }
-
-    // 4. Mock API Fetch
     const fetchBtn = document.getElementById('btn-fetch');
     if (fetchBtn) {
         fetchBtn.addEventListener('click', () => {
@@ -94,17 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = document.getElementById('btn-text');
             const result = document.getElementById('api-result');
 
-            // UI Loading State
             fetchBtn.disabled = true;
             icon.classList.add('fa-spin');
             text.innerText = 'Syncing...';
             
-            // Simulate Network Delay
             setTimeout(() => {
                 const mockData = [
-                    { type: 'push', title: "feat: 新增歌詞同步顯示功能", repo: "Pulse Music Player", time: "2小時前" },
-                    { type: 'merge', title: "fix: 修復 Shorts 隱藏失效的問題", repo: "YouTube Cleaner", time: "昨天" },
-                    { type: 'star', title: "docs: 更新 API 整合文件", repo: "AI Note Assistant", time: "3天前" }
+                    { type: 'push', title: "feat: Added Bento Grid Layout", repo: "Portfolio", time: "Just now" },
+                    { type: 'merge', title: "fix: Mobile responsive issues", repo: "Pulse Player", time: "2h ago" },
+                    { type: 'star', title: "docs: Updated README.md", repo: "DevOps Core", time: "5h ago" }
                 ];
 
                 result.innerHTML = '';
@@ -114,10 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     const div = document.createElement('div');
                     div.className = 'd-flex align-items-center mb-3 p-3 rounded-3 animate__animated animate__fadeInRight';
-                    div.style.background = 'rgba(255,255,255,0.08)';
+                    div.style.background = 'rgba(255,255,255,0.03)';
+                    div.style.border = '1px solid var(--border-color)';
                     div.style.animationDelay = `${index * 0.1}s`;
                     
-                    // Note: Bootstrap classes d-flex, align-items-center etc need to be present or defined in CSS
                     div.innerHTML = `
                         <div class="me-3 ${colorClass}">
                             <i class="fas ${iconClass} fa-lg"></i>
@@ -131,15 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     result.appendChild(div);
                 });
 
-                // Restore UI
                 fetchBtn.disabled = false;
                 icon.classList.remove('fa-spin');
-                text.innerText = '再次同步';
-            }, 1200);
+                text.innerText = 'Sync Activity';
+            }, 1000);
         });
     }
 
-    // 5. Contact Form Validation
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (event) => {
@@ -152,18 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const originalText = btn.innerText;
                 
                 btn.disabled = true;
-                btn.innerText = 'Sending...';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 
                 setTimeout(() => {
-                    btn.innerText = 'Message Sent!';
-                    btn.classList.add('btn-success');
-                    btn.classList.remove('btn-primary-glow');
+                    btn.innerHTML = '<i class="fas fa-check"></i> Sent';
+                    btn.style.background = '#4ade80';
+                    btn.style.color = '#000';
                     
                     setTimeout(() => {
                         btn.disabled = false;
                         btn.innerText = originalText;
-                        btn.classList.remove('btn-success');
-                        btn.classList.add('btn-primary-glow');
+                        btn.style.background = '';
+                        btn.style.color = '';
                         contactForm.reset();
                         contactForm.classList.remove('was-validated');
                     }, 3000);
@@ -171,20 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             contactForm.classList.add('was-validated');
-        });
-
-        // Input Validation Feedback
-        const inputs = contactForm.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('input', () => {
-                if (input.checkValidity()) {
-                    input.classList.add('is-valid');
-                    input.classList.remove('is-invalid');
-                } else {
-                    input.classList.add('is-invalid');
-                    input.classList.remove('is-valid');
-                }
-            });
         });
     }
 });
