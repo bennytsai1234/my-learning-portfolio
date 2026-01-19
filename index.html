@@ -3,80 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulse | Experience Music Visually</title>
+    <title>Benny's Portfolio | Pulse & More</title>
+    <meta name="description" content="Portfolio of Benny - Frontend Developer & Open Source Contributor. Featuring Pulse Music Player, YouTube Cleaner, and more.">
+    <meta property="og:title" content="Benny's Portfolio">
+    <meta property="og:description" content="Explore my projects: Pulse Music Player, YouTube Cleaner, and AI experiments.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-        
-        .hero-section {
-            padding-top: 8rem;
-            min-height: 90vh;
-        }
-
-        .hero-visual {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            aspect-ratio: 1/1;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pulse-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            opacity: 0.1;
-            animation: pulse-ring 4s infinite;
-        }
-
-        .pulse-circle:nth-child(1) { width: 100%; height: 100%; animation-delay: 0s; }
-        .pulse-circle:nth-child(2) { width: 80%; height: 80%; animation-delay: 1s; }
-        .pulse-circle:nth-child(3) { width: 60%; height: 60%; animation-delay: 2s; }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(0.8); opacity: 0.1; }
-            50% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(0.8); opacity: 0.1; }
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tech-pill {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            margin: 0.5rem;
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.03);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
-        }
-
-        .tech-pill:hover {
-            border-color: var(--accent-orange);
-            color: var(--text-main);
-            background: rgba(255, 153, 102, 0.1);
-        }
-
-        .navbar.scrolled {
-            background: rgba(26, 22, 22, 0.95);
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
     <div class="warm-glow warm-glow-1"></div>
@@ -84,131 +21,198 @@
 
     <nav class="navbar">
         <a href="#" class="navbar-brand">
-            <i class="fa-solid fa-bolt gradient-text" style="margin-right: 0.5rem;"></i>Pulse
+            <i class="fa-solid fa-code gradient-text" style="margin-right: 0.5rem;"></i>Benny.dev
         </a>
         <div class="navbar-nav">
-             <a href="#features" class="nav-link">Features</a>
-             <a href="#tech" class="nav-link">Stack</a>
+             <a href="#features" class="nav-link">Pulse</a>
+             <a href="#portfolio" class="nav-link">Portfolio</a>
+             <a href="#github-sync" class="nav-link">Activity</a>
+             <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <a href="https://github.com/bennytsai1234/pulse" target="_blank" class="btn btn-primary-glow" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">
+        <a href="https://github.com/bennytsai1234" target="_blank" class="btn btn-primary-glow" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">
             <i class="fa-brands fa-github"></i> GitHub
         </a>
     </nav>
 
-    <section class="hero-section">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <h1 class="hero-title">
-                    <span class="gradient-text">Pulse</span>
-                </h1>
-                <p class="hero-subtitle">Experience Music. Visually.</p>
-                
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-                    <span class="tech-pill"><i class="fa-brands fa-android"></i> Kotlin 2.0</span>
-                    <span class="tech-pill"><i class="fa-solid fa-layer-group"></i> Jetpack Compose</span>
-                    <span class="tech-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> Material You</span>
-                </div>
-            </div>
-
-            <div class="hero-visual">
-                <div class="pulse-circle"></div>
-                <div class="pulse-circle"></div>
-                <div class="pulse-circle"></div>
-                
-                <div class="glass-card" style="width: 300px; height: 300px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; padding: 0; margin: 0;">
-                    <div style="text-align: center;">
-                        <i class="fa-solid fa-music gradient-text" style="font-size: 8rem; display: block; margin-bottom: 1rem;"></i>
-                        <div style="display: flex; gap: 4px; justify-content: center; align-items: flex-end; height: 30px;">
-                            <div style="width: 4px; height: 40%; background: var(--text-main); border-radius: 2px;"></div>
-                            <div style="width: 4px; height: 80%; background: var(--accent-orange); border-radius: 2px;"></div>
-                            <div style="width: 4px; height: 60%; background: var(--text-main); border-radius: 2px;"></div>
-                            <div style="width: 4px; height: 90%; background: var(--accent-red); border-radius: 2px;"></div>
-                            <div style="width: 4px; height: 50%; background: var(--text-main); border-radius: 2px;"></div>
+    <main>
+        <header class="hero-section">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <h1 class="hero-title">
+                        Build. <span class="gradient-text">Ship.</span> Repeat.
+                    </h1>
+                    <p class="hero-subtitle">Frontend Developer & Open Source Contributor.</p>
+                    
+                    <div class="hero-stats-box glass-card" style="display: inline-flex; gap: 3rem; padding: 1.5rem 3rem; margin-top: 2rem;">
+                        <div style="text-align: center;">
+                            <div class="gradient-text" style="font-size: 2.5rem; font-weight: 700;">
+                                <span class="counter" data-target="15">0</span>
+                            </div>
+                            <div class="text-muted" style="font-size: 0.9rem;">Repositories</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="gradient-text" style="font-size: 2.5rem; font-weight: 700;">
+                                <span class="counter" data-target="500">0</span>
+                            </div>
+                            <div class="text-muted" style="font-size: 0.9rem;">Commits</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="gradient-text" style="font-size: 2.5rem; font-weight: 700;">
+                                <span class="counter" data-target="100">0</span>
+                            </div>
+                            <div class="text-muted" style="font-size: 0.9rem;">Hours Coding</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section id="features" style="padding: 6rem 0;">
-        <div class="container">
-            <div class="glass-card" style="padding: 3rem;">
-                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Crafted for Immersion</h2>
+        <section id="features" style="padding: 6rem 0;">
+            <div class="container">
+                <div class="glass-card" style="padding: 3rem;">
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <span class="tech-pill" style="border-color: var(--accent-orange); color: var(--accent-orange);">Featured Project</span>
+                        <h2 style="margin-top: 1rem; font-size: 2.5rem;">Pulse Music Player</h2>
+                        <p class="text-muted">Modern Android Music Experience</p>
+                    </div>
+                    
+                    <div class="feature-grid">
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(255, 153, 102, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <i class="fa-solid fa-palette gradient-text" style="font-size: 2rem;"></i>
+                            </div>
+                            <h3 style="margin-bottom: 1rem;">Dynamic Theme</h3>
+                            <p class="text-muted">The interface changes colors with your album art, creating a unique mood for every song.</p>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(255, 94, 98, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <i class="fa-solid fa-wave-square gradient-text" style="font-size: 2rem;"></i>
+                            </div>
+                            <h3 style="margin-bottom: 1rem;">Waveform Visualizer</h3>
+                            <p class="text-muted">Real-time audio visualization powered by Amplituda and raw PCM data processing.</p>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; background: rgba(255, 153, 102, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <i class="fa-solid fa-microphone-lines gradient-text" style="font-size: 2rem;"></i>
+                            </div>
+                            <h3 style="margin-bottom: 1rem;">Synced Lyrics</h3>
+                            <p class="text-muted">Follow along with time-synced lyrics that flow perfectly with the music playback.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" style="padding: 6rem 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Other Projects</h2>
                 
+                <div class="filter-btns">
+                    <button class="btn active" data-filter="all">All</button>
+                    <button class="btn" data-filter="web">Web</button>
+                    <button class="btn" data-filter="script">Scripts</button>
+                    <button class="btn" data-filter="backend">Backend</button>
+                </div>
+
+                <div style="display: none;">
+                    <label for="mobile-filter" class="visually-hidden">Filter Projects</label>
+                    <select id="mobile-filter" class="form-control" style="margin-bottom: 2rem;">
+                        <option value="all">All Projects</option>
+                        <option value="web">Web Development</option>
+                        <option value="script">Automation Scripts</option>
+                        <option value="backend">Backend Systems</option>
+                    </select>
+                </div>
+
                 <div class="feature-grid">
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(255, 153, 102, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                            <i class="fa-solid fa-palette gradient-text" style="font-size: 2rem;"></i>
+                    <div class="glass-card portfolio-item web" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 0.5rem;">AI Note Assistant</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <span class="tech-pill">Next.js</span>
+                            <span class="tech-pill">NestJS</span>
                         </div>
-                        <h3 style="margin-bottom: 1rem;">Dynamic Theme</h3>
-                        <p class="text-muted">The interface changes colors with your album art, creating a unique mood for every song.</p>
+                        <p class="text-muted">Full-stack note taking app with AI summarization capabilities.</p>
                     </div>
 
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(255, 94, 98, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                            <i class="fa-solid fa-wave-square gradient-text" style="font-size: 2rem;"></i>
+                    <div class="glass-card portfolio-item script" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 0.5rem;">YouTube Cleaner</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <span class="tech-pill">JavaScript</span>
+                            <span class="tech-pill">Tampermonkey</span>
                         </div>
-                        <h3 style="margin-bottom: 1rem;">Waveform Visualizer</h3>
-                        <p class="text-muted">Real-time audio visualization powered by Amplituda and raw PCM data processing.</p>
+                        <p class="text-muted">Browser userscript to remove shorts and distractions from YouTube.</p>
                     </div>
-
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(255, 153, 102, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                            <i class="fa-solid fa-microphone-lines gradient-text" style="font-size: 2rem;"></i>
+                    
+                    <div class="glass-card portfolio-item backend" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 0.5rem;">Auth Service</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <span class="tech-pill">Go</span>
+                            <span class="tech-pill">PostgreSQL</span>
                         </div>
-                        <h3 style="margin-bottom: 1rem;">Synced Lyrics</h3>
-                        <p class="text-muted">Follow along with time-synced lyrics that flow perfectly with the music playback.</p>
+                        <p class="text-muted">Secure authentication microservice with JWT and OAuth2 support.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="tech" style="padding: 4rem 0 8rem;">
-        <div class="container">
-            <div style="text-align: center;">
-                <h2 style="margin-bottom: 2rem; font-size: 2rem;">Built with Modern Android Standards</h2>
-                <div style="max-width: 800px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center;">
-                    <span class="tech-pill">Clean Architecture</span>
-                    <span class="tech-pill">MVVM</span>
-                    <span class="tech-pill">Hilt Dependency Injection</span>
-                    <span class="tech-pill">Room Database</span>
-                    <span class="tech-pill">Media3 ExoPlayer</span>
-                    <span class="tech-pill">Kotlin Coroutines</span>
-                    <span class="tech-pill">Flow API</span>
+        <section id="github-sync" style="padding: 6rem 0;">
+            <div class="container">
+                <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h3 style="margin: 0;">Recent Activity</h3>
+                        <button id="btn-fetch" class="btn btn-primary-glow" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">
+                            <i id="fetch-icon" class="fas fa-sync-alt"></i> <span id="btn-text">Sync</span>
+                        </button>
+                    </div>
+                    
+                    <div id="api-result">
+                        <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                            Click sync to fetch latest GitHub activity...
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 5rem;">
-                <a href="https://github.com/bennytsai1234/pulse" target="_blank" class="btn btn-primary-glow" style="padding: 1.2rem 3rem; font-size: 1.2rem;">
-                    <i class="fa-brands fa-github"></i> Get it on GitHub
-                </a>
-                <p class="text-muted" style="margin-top: 1rem; font-size: 0.9rem;">Open source and ready to build.</p>
+        </section>
+
+        <section id="contact" style="padding: 6rem 0;">
+            <div class="container">
+                <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Get In Touch</h2>
+                    <form id="contact-form" novalidate>
+                        <div style="margin-bottom: 1.5rem;">
+                            <label for="name" class="visually-hidden">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <label for="email" class="visually-hidden">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <label for="message" class="visually-hidden">Message</label>
+                            <textarea id="message" class="form-control" rows="5" placeholder="Message" required></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="btn btn-primary-glow" style="width: 100%;">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer style="padding: 2rem 0; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.2);">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <div>
-                <span class="gradient-text" style="font-weight: 700; font-size: 1.2rem;">Pulse</span>
+                <span class="gradient-text" style="font-weight: 700; font-size: 1.2rem;">Benny.dev</span>
             </div>
             <div class="text-muted" style="font-size: 0.9rem;">
-                &copy; 2026 Pulse Music Player.
+                &copy; 2026 Benny Tsai. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <script>
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

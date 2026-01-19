@@ -1,105 +1,124 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Navbar Scroll Effect (導航列滾動特效)
-    $(window).scroll(function() {
-        if ($(window).scrollTop() > 50) {
-            $('.navbar').css('background', 'rgba(15, 23, 42, 0.95)');
-            $('.navbar').css('padding', '0.5rem 0');
+    // 1. Navbar Scroll Effect
+    const navbar = document.querySelector('.navbar');
+    
+    function updateNavbar() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
         } else {
-            $('.navbar').css('background', 'rgba(15, 23, 42, 0.8)');
-            $('.navbar').css('padding', '1rem 0');
+            navbar.classList.remove('scrolled');
         }
-    });
+    }
+    
+    window.addEventListener('scroll', updateNavbar);
+    // Initial check
+    updateNavbar();
 
-    // 2. Counter Animation (數字跑馬燈)
-    var counted = false;
-    $(window).scroll(function() {
-        var oTop = $('.hero-stats-box').offset().top - window.innerHeight;
-        if (counted == false && $(window).scrollTop() > oTop) {
-            $('.counter').each(function() {
-                var $this = $(this);
-                var target = parseInt($this.data('target'));
-                $({ countNum: $this.text() }).animate({
-                    countNum: target
-                }, {
-                    duration: 2000,
-                    easing: 'swing',
-                    step: function() {
-                        $this.text(Math.ceil(this.countNum));
-                    },
-                    complete: function() {
-                        $this.text(this.countNum + "+");
-                    }
+    // 2. Counter Animation
+    let counted = false;
+    const statsBox = document.querySelector('.hero-stats-box');
+    
+    if (statsBox) {
+        window.addEventListener('scroll', () => {
+            const oTop = statsBox.offsetTop - window.innerHeight;
+            if (!counted && window.scrollY > oTop) {
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let count = 0;
+                    const duration = 2000;
+                    const interval = 20;
+                    const step = target / (duration / interval);
+                    
+                    const timer = setInterval(() => {
+                        count += step;
+                        if (count >= target) {
+                            counter.innerText = target + "+";
+                            clearInterval(timer);
+                        } else {
+                            counter.innerText = Math.ceil(count);
+                        }
+                    }, interval);
                 });
-            });
-            counted = true;
-        }
-    });
+                counted = true;
+            }
+        });
+    }
 
-    // 3. Portfolio Filter (作品集過濾)
-    $('.filter-btns .btn').click(function() {
-        var filter = $(this).data('filter');
-        
-        // Update Active UI
-        $('.filter-btns .btn').removeClass('active');
-        $(this).addClass('active');
+    // 3. Portfolio Filter
+    const filterBtns = document.querySelectorAll('.filter-btns .btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-        if (filter === 'all') {
-            $('.portfolio-item').fadeIn(400);
-        } else {
-            $('.portfolio-item').each(function() {
-                if ($(this).hasClass(filter)) {
-                    $(this).fadeIn(400);
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+            
+            // Update Active UI
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            portfolioItems.forEach(item => {
+                if (filter === 'all' || item.classList.contains(filter)) {
+                    item.style.display = ''; // Reset display to CSS default (e.g., block/flex)
+                    // Add fade-in animation logic if desired, or simpler CSS transition
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.opacity = '1', 50);
                 } else {
-                    $(this).fadeOut(400);
+                    item.style.display = 'none';
                 }
             });
-        }
+        });
     });
 
     // Mobile Filter
-    $('#mobile-filter').change(function() {
-        var filter = $(this).val();
-        if (filter === 'all') {
-            $('.portfolio-item').fadeIn(400);
-        } else {
-            $('.portfolio-item').each(function() {
-                if ($(this).hasClass(filter)) {
-                    $(this).fadeIn(400);
+    const mobileFilter = document.getElementById('mobile-filter');
+    if (mobileFilter) {
+        mobileFilter.addEventListener('change', (e) => {
+            const filter = e.target.value;
+            portfolioItems.forEach(item => {
+                if (filter === 'all' || item.classList.contains(filter)) {
+                    item.style.display = '';
                 } else {
-                    $(this).fadeOut(400);
+                    item.style.display = 'none';
                 }
             });
-        }
-    });
+        });
+    }
 
-    // 4. Mock API Fetch (模擬數據抓取)
-    $('#btn-fetch').click(function() {
-        var $btn = $(this);
-        var $icon = $('#fetch-icon');
-        var $text = $('#btn-text');
-        var $result = $('#api-result');
+    // 4. Mock API Fetch
+    const fetchBtn = document.getElementById('btn-fetch');
+    if (fetchBtn) {
+        fetchBtn.addEventListener('click', () => {
+            const icon = document.getElementById('fetch-icon');
+            const text = document.getElementById('btn-text');
+            const result = document.getElementById('api-result');
 
-        // UI Loading State
-        $btn.prop('disabled', true);
-        $icon.addClass('fa-spin');
-        $text.text('Syncing...');
-        
-        // Simulate Network Delay
-        setTimeout(function() {
-            var mockData = [
-                { type: 'push', title: "feat: 新增歌詞同步顯示功能", repo: "Pulse Music Player", time: "2小時前" },
-                { type: 'merge', title: "fix: 修復 Shorts 隱藏失效的問題", repo: "YouTube Cleaner", time: "昨天" },
-                { type: 'star', title: "docs: 更新 API 整合文件", repo: "AI Note Assistant", time: "3天前" }
-            ];
+            // UI Loading State
+            fetchBtn.disabled = true;
+            icon.classList.add('fa-spin');
+            text.innerText = 'Syncing...';
+            
+            // Simulate Network Delay
+            setTimeout(() => {
+                const mockData = [
+                    { type: 'push', title: "feat: 新增歌詞同步顯示功能", repo: "Pulse Music Player", time: "2小時前" },
+                    { type: 'merge', title: "fix: 修復 Shorts 隱藏失效的問題", repo: "YouTube Cleaner", time: "昨天" },
+                    { type: 'star', title: "docs: 更新 API 整合文件", repo: "AI Note Assistant", time: "3天前" }
+                ];
 
-            $result.empty();
-            mockData.forEach(function(item, index) {
-                var iconClass = item.type === 'push' ? 'fa-code-branch' : (item.type === 'merge' ? 'fa-code-merge' : 'fa-file-alt');
-                var colorClass = item.type === 'push' ? 'text-success' : (item.type === 'merge' ? 'text-primary' : 'text-info');
-                
-                var html = `
-                    <div class="d-flex align-items-center mb-3 p-3 rounded-3 animate__animated animate__fadeInRight" style="background: rgba(255,255,255,0.08); animation-delay: ${index * 0.1}s">
+                result.innerHTML = '';
+                mockData.forEach((item, index) => {
+                    const iconClass = item.type === 'push' ? 'fa-code-branch' : (item.type === 'merge' ? 'fa-code-merge' : 'fa-file-alt');
+                    const colorClass = item.type === 'push' ? 'text-success' : (item.type === 'merge' ? 'text-primary' : 'text-info');
+                    
+                    const div = document.createElement('div');
+                    div.className = 'd-flex align-items-center mb-3 p-3 rounded-3 animate__animated animate__fadeInRight';
+                    div.style.background = 'rgba(255,255,255,0.08)';
+                    div.style.animationDelay = `${index * 0.1}s`;
+                    
+                    // Note: Bootstrap classes d-flex, align-items-center etc need to be present or defined in CSS
+                    div.innerHTML = `
                         <div class="me-3 ${colorClass}">
                             <i class="fas ${iconClass} fa-lg"></i>
                         </div>
@@ -108,50 +127,64 @@ $(document).ready(function() {
                             <small class="text-muted">${item.repo}</small>
                         </div>
                         <small class="text-muted">${item.time}</small>
-                    </div>
-                `;
-                $result.append(html);
-            });
+                    `;
+                    result.appendChild(div);
+                });
 
-            // Restore UI
-            $btn.prop('disabled', false);
-            $icon.removeClass('fa-spin');
-            $text.text('再次同步');
-        }, 1200);
-    });
+                // Restore UI
+                fetchBtn.disabled = false;
+                icon.classList.remove('fa-spin');
+                text.innerText = '再次同步';
+            }, 1200);
+        });
+    }
 
     // 5. Contact Form Validation
-    $('#contact-form').on('submit', function(event) {
-        var form = this;
-        if (!form.checkValidity()) {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            event.stopPropagation();
-        } else {
-            event.preventDefault();
-            var $btn = $('#submit-btn');
-            var originalText = $btn.text();
             
-            $btn.prop('disabled', true).text('Sending...');
-            
-            setTimeout(function() {
-                $btn.text('Message Sent!').addClass('btn-success').removeClass('btn-primary-glow');
+            if (!contactForm.checkValidity()) {
+                event.stopPropagation();
+            } else {
+                const btn = document.getElementById('submit-btn');
+                const originalText = btn.innerText;
+                
+                btn.disabled = true;
+                btn.innerText = 'Sending...';
+                
                 setTimeout(() => {
-                    $btn.prop('disabled', false).text(originalText).removeClass('btn-success').addClass('btn-primary-glow');
-                    form.reset();
-                    $(form).removeClass('was-validated');
-                }, 3000);
-            }, 1500);
-        }
-        $(form).addClass('was-validated');
-    });
+                    btn.innerText = 'Message Sent!';
+                    btn.classList.add('btn-success');
+                    btn.classList.remove('btn-primary-glow');
+                    
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerText = originalText;
+                        btn.classList.remove('btn-success');
+                        btn.classList.add('btn-primary-glow');
+                        contactForm.reset();
+                        contactForm.classList.remove('was-validated');
+                    }, 3000);
+                }, 1500);
+            }
+            
+            contactForm.classList.add('was-validated');
+        });
 
-    // Input Validation Feedback
-    $('#contact-form input, #contact-form textarea').on('input', function() {
-        if (this.checkValidity()) {
-            $(this).addClass('is-valid').removeClass('is-invalid');
-        } else {
-            $(this).addClass('is-invalid').removeClass('is-valid');
-        }
-    });
-
+        // Input Validation Feedback
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.checkValidity()) {
+                    input.classList.add('is-valid');
+                    input.classList.remove('is-invalid');
+                } else {
+                    input.classList.add('is-invalid');
+                    input.classList.remove('is-valid');
+                }
+            });
+        });
+    }
 });
