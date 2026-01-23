@@ -1,0 +1,69 @@
+:root {
+  /* --- Colors --- */
+  /* Backgrounds */
+  --bg-dark: #050505; /* Deeper black for high contrast */
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass-hover: rgba(255, 255, 255, 0.06);
+  --bg-glass-heavy: rgba(20, 20, 23, 0.7); /* For Navbar */
+
+  /* Borders */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-highlight: rgba(255, 255, 255, 0.15); /* Top border highlight */
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa; /* Zinc 400 */
+  --text-muted: #71717a;     /* Zinc 500 */
+
+  /* Accents / Gradients */
+  /* "Aurora" - More complex mesh-like gradients */
+  --gradient-primary: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%); /* Electric Blue */
+  --gradient-secondary: linear-gradient(135deg, #FF0099 0%, #493240 100%); /* Magenta Deep */
+  --gradient-glow: conic-gradient(from 180deg at 50% 50%, #00C6FF 0deg, #0072FF 180deg, #00C6FF 360deg);
+
+  --gradient-text: linear-gradient(to bottom right, #ffffff 30%, #a5a5a5 100%); /* Silver metallic text */
+
+  /* Brand Colors */
+  --color-primary: #0072FF;
+  --color-success: #00f260;
+
+  /* --- Typography --- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Tracking (Letter Spacing) */
+  --tracking-tighter: -0.04em; /* For huge headlines */
+  --tracking-tight: -0.02em;   /* For section titles */
+  --tracking-normal: 0em;      /* Body */
+  --tracking-wide: 0.05em;     /* Overlines/Caps */
+
+  /* Fluid Typography Scale (Refined) */
+  --text-h1: clamp(3rem, 6vw, 5rem);
+  --text-h2: clamp(2.25rem, 5vw, 3.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --text-body: 1rem;
+  --text-sm: 0.875rem;
+
+  /* --- Spacing --- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px; /* Increased for breathability */
+  --space-xl: 64px;
+  --space-2xl: 128px;
+
+  /* --- Layout --- */
+  --container-width: 1100px; /* Slightly tighter for text readability */
+  --header-height: 80px;
+  --radius-md: 12px;
+  --radius-lg: 20px; /* Smooth corners */
+  --radius-full: 9999px;
+
+  /* --- Shadows & Depth --- */
+  /* Premium Glass Shadow */
+  --shadow-glass:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 10px 15px -3px rgba(0, 0, 0, 0.3);
+
+  --shadow-glow: 0 0 40px -10px rgba(0, 114, 255, 0.4);
+}

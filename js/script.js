@@ -1,157 +1,142 @@
-$(document).ready(function() {
-    
-    // 1. Navbar Scroll Effect (導航列滾動特效)
-    $(window).scroll(function() {
-        if ($(window).scrollTop() > 50) {
-            $('.navbar').css('background', 'rgba(15, 23, 42, 0.95)');
-            $('.navbar').css('padding', '0.5rem 0');
-        } else {
-            $('.navbar').css('background', 'rgba(15, 23, 42, 0.8)');
-            $('.navbar').css('padding', '1rem 0');
-        }
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 1. Navigation Logic ---
+  const navbar = document.querySelector('.navbar');
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  // Scroll Effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar.classList.add('scrolled');
+      navbar.style.background = 'rgba(10, 10, 11, 0.8)'; // Darker bg on scroll
+      navbar.style.backdropFilter = 'blur(16px)';
+      navbar.style.padding = '0.5rem 1.5rem';
+    } else {
+      navbar.classList.remove('scrolled');
+      navbar.style.background = 'var(--bg-glass)';
+      navbar.style.padding = '0.75rem 1.5rem';
+    }
+  });
+
+  // Mobile Menu Toggle
+  mobileToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = mobileToggle.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-times');
+    } else {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    }
+  });
+
+  // Close menu when clicking a link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    });
+  });
+
+
+  // --- 2. Intersection Observer for Animations ---
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-fade-up').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+    observer.observe(el);
+  });
+
+
+  // --- 3. API Demo Simulation ---
+  const fetchBtn = document.getElementById('btn-fetch');
+  const apiResult = document.getElementById('api-result');
+
+  fetchBtn.addEventListener('click', async () => {
+    // UI Loading State
+    const originalText = fetchBtn.innerHTML;
+    fetchBtn.disabled = true;
+    fetchBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Fetching...';
+    apiResult.innerHTML = '<div class="d-flex align-center justify-center h-100"><div class="loading-spinner"></div></div>';
+
+    // Simulate Network Delay (1.5s)
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Mock Data
+    const mockData = [
+      { type: 'push', title: "feat: Implement Neon Design System", repo: "web-frontend-demo", time: "2m ago" },
+      { type: 'merge', title: "fix: Mobile navigation z-index bug", repo: "Pulse Music Player", time: "1h ago" },
+      { type: 'star', title: "docs: Update API Reference", repo: "AI Note Assistant", time: "3h ago" }
+    ];
+
+    // Render Result
+    apiResult.innerHTML = '';
+    mockData.forEach((item, index) => {
+      const colorClass = item.type === 'push' ? '#00f260' : (item.type === 'merge' ? '#0575e6' : '#f5576c');
+      const iconClass = item.type === 'push' ? 'fa-code-branch' : (item.type === 'merge' ? 'fa-code-merge' : 'fa-star');
+
+      const itemHtml = `
+        <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--border-glass); opacity: 0; animation: fadeInUp 0.5s ease forwards ${index * 0.1}s;">
+          <div style="color: ${colorClass}; min-width: 24px;">
+            <i class="fas ${iconClass}"></i>
+          </div>
+          <div style="flex-grow: 1;">
+            <div style="font-weight: 600; color: #fff;">${item.title}</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary);">${item.repo}</div>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">${item.time}</div>
+        </div>
+      `;
+      apiResult.innerHTML += itemHtml;
     });
 
-    // 2. Counter Animation (數字跑馬燈)
-    var counted = false;
-    $(window).scroll(function() {
-        var oTop = $('.hero-stats-box').offset().top - window.innerHeight;
-        if (counted == false && $(window).scrollTop() > oTop) {
-            $('.counter').each(function() {
-                var $this = $(this);
-                var target = parseInt($this.data('target'));
-                $({ countNum: $this.text() }).animate({
-                    countNum: target
-                }, {
-                    duration: 2000,
-                    easing: 'swing',
-                    step: function() {
-                        $this.text(Math.ceil(this.countNum));
-                    },
-                    complete: function() {
-                        $this.text(this.countNum + "+");
-                    }
-                });
-            });
-            counted = true;
-        }
-    });
+    // Restore Button
+    fetchBtn.disabled = false;
+    fetchBtn.innerHTML = originalText;
+  });
 
-    // 3. Portfolio Filter (作品集過濾)
-    $('.filter-btns .btn').click(function() {
-        var filter = $(this).data('filter');
-        
-        // Update Active UI
-        $('.filter-btns .btn').removeClass('active');
-        $(this).addClass('active');
 
-        if (filter === 'all') {
-            $('.portfolio-item').fadeIn(400);
-        } else {
-            $('.portfolio-item').each(function() {
-                if ($(this).hasClass(filter)) {
-                    $(this).fadeIn(400);
-                } else {
-                    $(this).fadeOut(400);
-                }
-            });
-        }
-    });
+  // --- 4. Contact Form Handler ---
+  const contactForm = document.getElementById('contact-form');
 
-    // Mobile Filter
-    $('#mobile-filter').change(function() {
-        var filter = $(this).val();
-        if (filter === 'all') {
-            $('.portfolio-item').fadeIn(400);
-        } else {
-            $('.portfolio-item').each(function() {
-                if ($(this).hasClass(filter)) {
-                    $(this).fadeIn(400);
-                } else {
-                    $(this).fadeOut(400);
-                }
-            });
-        }
-    });
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    // 4. Mock API Fetch (模擬數據抓取)
-    $('#btn-fetch').click(function() {
-        var $btn = $(this);
-        var $icon = $('#fetch-icon');
-        var $text = $('#btn-text');
-        var $result = $('#api-result');
+    const btn = contactForm.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
 
-        // UI Loading State
-        $btn.prop('disabled', true);
-        $icon.addClass('fa-spin');
-        $text.text('Syncing...');
-        
-        // Simulate Network Delay
-        setTimeout(function() {
-            var mockData = [
-                { type: 'push', title: "feat: 新增歌詞同步顯示功能", repo: "Pulse Music Player", time: "2小時前" },
-                { type: 'merge', title: "fix: 修復 Shorts 隱藏失效的問題", repo: "YouTube Cleaner", time: "昨天" },
-                { type: 'star', title: "docs: 更新 API 整合文件", repo: "AI Note Assistant", time: "3天前" }
-            ];
+    btn.disabled = true;
+    btn.innerHTML = 'Sending...';
 
-            $result.empty();
-            mockData.forEach(function(item, index) {
-                var iconClass = item.type === 'push' ? 'fa-code-branch' : (item.type === 'merge' ? 'fa-code-merge' : 'fa-file-alt');
-                var colorClass = item.type === 'push' ? 'text-success' : (item.type === 'merge' ? 'text-primary' : 'text-info');
-                
-                var html = `
-                    <div class="d-flex align-items-center mb-3 p-3 rounded-3 animate__animated animate__fadeInRight" style="background: rgba(255,255,255,0.08); animation-delay: ${index * 0.1}s">
-                        <div class="me-3 ${colorClass}">
-                            <i class="fas ${iconClass} fa-lg"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0 fw-bold text-white">${item.title}</h6>
-                            <small class="text-muted">${item.repo}</small>
-                        </div>
-                        <small class="text-muted">${item.time}</small>
-                    </div>
-                `;
-                $result.append(html);
-            });
+    // Simulate send
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully';
+      btn.style.background = 'var(--gradient-primary)'; // Keep it glowing green/blue
 
-            // Restore UI
-            $btn.prop('disabled', false);
-            $icon.removeClass('fa-spin');
-            $text.text('再次同步');
-        }, 1200);
-    });
-
-    // 5. Contact Form Validation
-    $('#contact-form').on('submit', function(event) {
-        var form = this;
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            event.preventDefault();
-            var $btn = $('#submit-btn');
-            var originalText = $btn.text();
-            
-            $btn.prop('disabled', true).text('Sending...');
-            
-            setTimeout(function() {
-                $btn.text('Message Sent!').addClass('btn-success').removeClass('btn-primary-glow');
-                setTimeout(() => {
-                    $btn.prop('disabled', false).text(originalText).removeClass('btn-success').addClass('btn-primary-glow');
-                    form.reset();
-                    $(form).removeClass('was-validated');
-                }, 3000);
-            }, 1500);
-        }
-        $(form).addClass('was-validated');
-    });
-
-    // Input Validation Feedback
-    $('#contact-form input, #contact-form textarea').on('input', function() {
-        if (this.checkValidity()) {
-            $(this).addClass('is-valid').removeClass('is-invalid');
-        } else {
-            $(this).addClass('is-invalid').removeClass('is-valid');
-        }
-    });
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        contactForm.reset();
+      }, 3000);
+    }, 1500);
+  });
 
 });

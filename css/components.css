@@ -1,0 +1,175 @@
+/* Component Styles */
+
+/* --- Buttons --- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  border-radius: var(--radius-full);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 0.5rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-primary-glow {
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 114, 255, 0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Button Shine Effect */
+.btn-primary-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: none;
+  z-index: -1;
+}
+
+.btn-primary-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 114, 255, 0.4);
+}
+
+.btn-primary-glow:hover::after {
+  left: 200%;
+  transition: all 0.6s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-glass-highlight);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--text-primary);
+}
+
+/* --- Glass Card (Premium) --- */
+.glass-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+
+  /* Inner light highlight for 3D feel */
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    var(--shadow-glass);
+
+  border-radius: var(--radius-lg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-glass-highlight);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+    0 20px 40px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Badges & Tags --- */
+.badge-glow {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 1rem;
+  background: rgba(0, 114, 255, 0.1);
+  border: 1px solid rgba(0, 114, 255, 0.2);
+  color: #60a5fa; /* Cyan/Blue */
+  border-radius: var(--radius-full);
+  font-size: 0.75rem; /* Smaller, sharper */
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  box-shadow: 0 0 15px rgba(0, 114, 255, 0.15);
+}
+
+.badge-glow::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #60a5fa;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 8px #60a5fa;
+}
+
+.tag, .skill-tag {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md); /* Slightly squared looks more tech */
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+}
+
+/* --- Forms (Minimalist) --- */
+.form-input {
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: rgba(0, 114, 255, 0.05);
+  box-shadow: 0 0 0 4px rgba(0, 114, 255, 0.1);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin-top: auto;
+  opacity: 0.8;
+}
+
+.link-arrow:hover {
+  opacity: 1;
+  gap: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
