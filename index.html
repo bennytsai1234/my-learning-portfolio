@@ -1,29 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
+    [教學] head 區域
+    這裡存放網頁的「元數據 (Metadata)」，這些資訊不會直接顯示在網頁上，
+    但對瀏覽器和搜尋引擎非常重要。
+-->
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport 設定：這行是 RWD (響應式網頁) 的關鍵，確保在手機上不會縮放比例跑掉 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Benny's Portfolio | Built for Impact</title>
-    <meta name="description" content="Portfolio of Benny - Frontend Developer & Open Source Contributor. Featuring Pulse Music Player, YouTube Cleaner, and more.">
+    
+    <!-- SEO 優化：Description 會顯示在 Google 搜尋結果的下方 -->
+    <meta name="description" content="Portfolio of Benny - Frontend Developer & Open Source Contributor.">
+    
+    <!-- Open Graph (OG) 標籤：當你把連結貼到 Facebook/Twitter/Line 時顯示的預覽圖和標題 -->
     <meta property="og:title" content="Benny's Portfolio">
     <meta property="og:description" content="Explore my projects: Pulse Music Player, YouTube Cleaner, and AI experiments.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="img/og-preview.png">
     
+    <!-- CSS 引入：連結外部樣式表 -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- CDN (Content Delivery Network) 資源：直接從網路引入 FontAwesome 圖示庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入 Animate.css 動畫庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
     
+    <!-- 
+        [教學] 語意化標籤 - <nav>
+        告訴瀏覽器這裡面是「導覽連結」。
+        無障礙閱讀器 (Screen Reader) 會優先讀取這裡。
+    -->
     <nav class="navbar">
         <a href="#" class="navbar-brand">
+            <!-- Inline Style (行內樣式)：雖然不推薦大量使用，但對於這種微小的特殊調整很方便 -->
             <div style="width: 30px; height: 30px; background: var(--primary-gradient); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
                 <i class="fa-solid fa-bolt text-white" style="font-size: 0.8rem;"></i>
             </div>
             Benny.dev
         </a>
         <div class="navbar-nav">
+             <!-- href="#id" 這是「錨點連結 (Anchor Link)」，點擊會滑動到對應的 ID 區塊 -->
              <a href="#features" class="nav-link">Featured</a>
              <a href="#portfolio" class="nav-link">Projects</a>
              <a href="#contact" class="nav-link">Contact</a>
@@ -33,9 +55,12 @@
         </a>
     </nav>
 
+    <!-- [教學] <main>：網頁的主要內容區域，每個頁面應該只有一個 main -->
     <main>
+        <!-- Hero Section：通常指網頁最上方的「主視覺區」，用來第一眼抓住使用者目光 -->
         <header class="hero-section">
             <div class="hero-visual">
+                <!-- CSS 動畫元素：這兩個圓圈會在 CSS 中被設定旋轉動畫 -->
                 <div class="pulse-circle"></div>
                 <div class="pulse-circle"></div>
             </div>
@@ -44,6 +69,7 @@
                 <div class="tech-pill" style="margin-bottom: 1.5rem;">Available for hire</div>
                 <h1 class="hero-title">
                     Building the <br>
+                    <!-- span 用來包裹需要單獨設定樣式的文字 -->
                     <span class="gradient-text">Next Generation</span> <br>
                     of Web Apps.
                 </h1>
@@ -54,9 +80,11 @@
                     <a href="#contact" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: #fff;">Contact Me</a>
                 </div>
 
+                <!-- 數據統計區塊：使用了 "Glassmorphism" (玻璃擬態) 設計 -->
                 <div class="hero-stats-box glass-card" style="display: inline-flex; gap: 3rem; padding: 1.5rem 3rem;">
                     <div style="text-align: center;">
                         <div class="gradient-text" style="font-size: 2rem; font-weight: 700;">
+                            <!-- data-target 是自定義屬性，JS 會讀取這個數值來執行動畫 -->
                             <span class="counter" data-target="15">0</span>
                         </div>
                         <div class="text-muted" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Repos</div>
@@ -77,6 +105,7 @@
             </div>
         </header>
 
+        <!-- 作品集區塊 -->
         <section id="portfolio" style="padding: 6rem 0;">
             <div class="container">
                 <div style="text-align: center; margin-bottom: 4rem;">
@@ -84,13 +113,16 @@
                     <p class="text-muted">A selection of projects that I'm proud of.</p>
                 </div>
 
+                <!-- 篩選按鈕：JS 會監聽這裡的點擊事件 -->
                 <div class="filter-btns">
                     <button class="btn active" data-filter="all">All</button>
                     <button class="btn" data-filter="app">Apps</button>
                     <button class="btn" data-filter="tool">Tools</button>
                 </div>
 
+                <!-- Bento Grid (便當盒佈局)：這是近年很流行的 Grid 佈局風格 -->
                 <div class="bento-grid">
+                    <!-- 項目 1: 跨越 8 欄 (span-8) -->
                     <div class="bento-item span-8 portfolio-item app">
                         <div class="glass-card" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
                             <div style="margin-bottom: 1.5rem;">
@@ -98,7 +130,7 @@
                             </div>
                             <h3 style="font-size: 2rem; margin-bottom: 1rem;">Pulse Music Player</h3>
                             <p class="text-muted" style="margin-bottom: 2rem; max-width: 500px;">
-                                A modern Android music player built with Kotlin and Jetpack Compose. Features real-time waveform visualization, lyric synchronization, and dynamic theming based on album art.
+                                A modern Android music player built with Kotlin and Jetpack Compose. Features real-time waveform visualization.
                             </p>
                             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: auto;">
                                 <span class="tech-pill">Kotlin</span>
@@ -108,17 +140,19 @@
                         </div>
                     </div>
 
+                    <!-- 項目 2: 跨越 4 欄 (span-4) -->
                     <div class="bento-item span-4 portfolio-item tool">
                         <div class="glass-card" style="height: 100%; background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,153,102,0.05) 100%);">
                             <i class="fa-solid fa-wand-magic-sparkles gradient-text" style="font-size: 3rem; margin-bottom: 1.5rem;"></i>
                             <h3>YouTube Cleaner</h3>
                             <p class="text-muted" style="margin-bottom: 1rem;">
-                                Tampermonkey script to remove Shorts and distractions. Focus on what matters.
+                                Tampermonkey script to remove Shorts and distractions.
                             </p>
                             <span class="tech-pill" style="width: fit-content;">JavaScript</span>
                         </div>
                     </div>
 
+                    <!-- 項目 3 -->
                     <div class="bento-item span-4 portfolio-item app">
                         <div class="glass-card" style="height: 100%;">
                             <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
@@ -132,6 +166,7 @@
                         </div>
                     </div>
 
+                    <!-- 項目 4: Activity Feed (模擬 API 資料) -->
                     <div class="bento-item span-4 portfolio-item tool">
                         <div class="glass-card" style="height: 100%;">
                              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
@@ -140,6 +175,7 @@
                                     <i id="fetch-icon" class="fas fa-sync-alt"></i> <span id="btn-text">Sync</span>
                                 </button>
                             </div>
+                            <!-- 這裡是空的，JS 會把資料「塞」進這裡 -->
                             <div id="api-result" style="font-size: 0.85rem;">
                                 <div style="color: var(--text-muted);">
                                     <i class="fas fa-code-branch text-success me-2"></i> pushed to <strong>main</strong>
@@ -149,6 +185,7 @@
                         </div>
                     </div>
 
+                    <!-- 項目 5 -->
                     <div class="bento-item span-4 portfolio-item">
                         <div class="glass-card" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
                             <h3 style="margin-bottom: 1rem;">Let's work together</h3>
@@ -159,14 +196,17 @@
             </div>
         </section>
 
+        <!-- 聯絡表單區塊 -->
         <section id="contact" style="padding: 6rem 0; border-top: 1px solid var(--border-color);">
             <div class="container">
                 <div class="glass-card" style="max-width: 600px; margin: 0 auto; background: var(--bg-dark);">
                     <h2 style="text-align: center; margin-bottom: 0.5rem;">Get In Touch</h2>
                     <p class="text-muted" style="text-align: center; margin-bottom: 2rem;">Have a project in mind?</p>
                     
+                    <!-- Form 表單：novalidate 表示我們用 JS 來自定義驗證，不使用瀏覽器預設的 -->
                     <form id="contact-form" novalidate>
                         <div style="margin-bottom: 1.5rem;">
+                            <!-- Label 用於提升可用性 (Accessibility)，visually-hidden 讓它只給讀屏軟體讀 -->
                             <label for="name" class="visually-hidden">Your Name</label>
                             <input type="text" id="name" class="form-control" placeholder="Name" required>
                         </div>
@@ -187,6 +227,7 @@
         </section>
     </main>
 
+    <!-- 頁尾 -->
     <footer style="padding: 2rem 0;">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -199,6 +240,7 @@
         </div>
     </footer>
 
+    <!-- 引入 JavaScript：通常放在 body 結束前，確保 HTML 元素都載入完了再執行腳本 -->
     <script src="js/script.js"></script>
 </body>
 </html>

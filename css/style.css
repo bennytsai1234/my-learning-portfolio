@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap');
 @import url('utilities.css');
 
+/* 
+   [教學] :root 偽類
+   這是 CSS 變數 (Custom Properties) 定義的地方。
+   好處是：只要改這裡的顏色，整個網站的顏色都會跟著變！
+   試試看修改 --accent-orange 的顏色碼？
+*/
 :root {
     --bg-dark: #0f0f11;
-    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card: rgba(255, 255, 255, 0.03); /* 0.03 代表只有 3% 的不透明度，非常通透 */
     --bg-card-hover: rgba(255, 255, 255, 0.06);
     
+    /* 線性漸層：從右上到左下的漸層色 */
     --primary-gradient: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
     --accent-orange: #ff9966;
     --accent-red: #ff5e62;
@@ -17,6 +24,7 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.2);
     
+    /* 陰影設定：讓卡片有浮起來的感覺 */
     --glass-shadow: 0 0 0 1px var(--border-color), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
     --glow-shadow: 0 0 80px -20px var(--accent-glow);
     
@@ -24,10 +32,11 @@
     --font-body: 'Outfit', sans-serif;
 }
 
+/* 全域重置：移除瀏覽器預設的 margin 和 padding */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* 讓 padding 不會撐大元素的寬度 */
 }
 
 body {
@@ -35,22 +44,29 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* 防止水平捲軸出現 */
     min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; /* 讓字體在 Mac 上更清晰 */
+    /* 背景圖樣：使用了兩個徑向漸層來製造氛圍感 */
     background-image: 
         radial-gradient(circle at 15% 50%, rgba(255, 153, 102, 0.08), transparent 25%),
         radial-gradient(circle at 85% 30%, rgba(255, 94, 98, 0.08), transparent 25%);
-    background-attachment: fixed;
+    background-attachment: fixed; /* 背景固定，不隨卷軸移動 */
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.02em; /* 字距微調，讓標題更緊湊有力 */
     color: var(--text-main);
 }
 
+/* 
+   [教學] 文字漸層效果
+   這是現代網頁很酷的技巧：
+   1. background-clip: text (把背景裁剪成文字形狀)
+   2. text-fill-color: transparent (把文字本身變透明，透出背景)
+*/
 .gradient-text {
     background: var(--primary-gradient);
     -webkit-background-clip: text;
@@ -60,17 +76,18 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     -webkit-text-fill-color: transparent;
 }
 
+/* 導覽列 */
 .navbar {
-    position: fixed;
+    position: fixed; /* 固定在螢幕上方 */
     top: 0;
     width: 100%;
     padding: 1.25rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
+    display: flex; /* Flexbox 排版 */
+    justify-content: space-between; /* 左右撐開 */
+    align-items: center; /* 垂直置中 */
+    z-index: 1000; /* 確保在最上層 */
     background: rgba(15, 15, 17, 0.6);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px); /* 毛玻璃模糊效果 */
     border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
 }
@@ -114,6 +131,11 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     color: var(--text-main);
 }
 
+/* 
+   [教學] 玻璃擬態卡片 (Glassmorphism Card)
+   這是本專案的核心樣式。
+   結合了半透明背景、邊框、模糊陰影。
+*/
 .glass-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -121,11 +143,12 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     padding: 2.5rem;
     box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* 確保內部光暈不會跑出去 */
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     z-index: 1;
 }
 
+/* 滑鼠移動時的聚光燈效果 - 透過 JS 動態改變 --mouse-x/y 變數 */
 .glass-card::before {
     content: '';
     position: absolute;
@@ -142,7 +165,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     z-index: 2;
     opacity: 0;
     transition: opacity 0.5s ease;
-    pointer-events: none;
+    pointer-events: none; /* 讓滑鼠點擊可以穿透這層光暈 */
 }
 
 .glass-card:hover::before {
@@ -151,10 +174,15 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 
 .glass-card:hover {
     border-color: var(--border-hover);
-    transform: translateY(-4px);
+    transform: translateY(-4px); /* 滑鼠懸停時微微上浮 */
     box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3);
 }
 
+/* 
+   [教學] CSS Grid (網格系統)
+   這裡使用了 12 欄位的網格系統，類似 Bootstrap 的概念。
+   grid-template-columns: repeat(12, 1fr) 意思是切成 12 等份。
+*/
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -167,11 +195,13 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     flex-direction: column;
 }
 
+/* 跨欄設定 */
 .span-12 { grid-column: span 12; }
 .span-8 { grid-column: span 8; }
 .span-6 { grid-column: span 6; }
 .span-4 { grid-column: span 4; }
 
+/* RWD 斷點：當螢幕小於 992px 時，所有項目都變成佔滿 12 欄 (變回垂直排列) */
 @media (max-width: 992px) {
     .span-8, .span-6, .span-4 { grid-column: span 12; }
 }
@@ -200,6 +230,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     overflow: hidden;
 }
 
+/* 按鈕的光暈動畫效果 */
 .btn-primary-glow::after {
     content: '';
     position: absolute;
@@ -234,6 +265,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     position: relative;
 }
 
+/* clamp() 函數：讓字體大小在最小值與最大值之間動態縮放 */
 .hero-title {
     font-size: clamp(3.5rem, 8vw, 6.5rem);
     line-height: 1.1;
@@ -304,6 +336,8 @@ footer {
 }
 
 .text-muted { color: var(--text-muted) !important; }
+
+/* 隱藏元素但保留可讀性 (給螢幕閱讀器用) */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -365,6 +399,7 @@ footer {
     justify-content: center;
 }
 
+/* 呼吸燈動畫 */
 .pulse-circle {
     position: absolute;
     border-radius: 50%;

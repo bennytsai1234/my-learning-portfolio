@@ -1,11 +1,21 @@
-# 🎯 Benny's Learning Portfolio
+# 🎓 Benny's Learning Portfolio (學習型專案)
 
-這是一個專門展示我學習前端開發歷程與實作專案的個人作品集網頁。
+> **這不僅僅是一個作品集，這是一個「教你如何寫出作品集」的互動式教材。**
+
+這個專案經過重構，旨在教導初學者如何從零打造一個現代化、具備玻璃擬態 (Glassmorphism) 風格的網頁。
 
 [![GitHub Stars](https://img.shields.io/github/stars/bennytsai1234/my-learning-portfolio?style=for-the-badge&color=gold)](https://github.com/bennytsai1234/my-learning-portfolio)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ---
+
+## 📚 如何開始學習？
+
+1.  **閱讀 [TUTORIAL.md](./TUTORIAL.md)**：這是本專案的教科書，詳細解說了學習路徑與挑戰。
+2.  **查看原始碼**：
+    *   `index.html`: 包含詳細的 HTML 語意化標籤教學。
+    *   `css/style.css`: 包含詳細的 CSS 變數、Flexbox、Grid 與玻璃擬態教學。
+    *   `js/script.js`: 包含詳細的 DOM 操作與事件監聽教學。
 
 ## 🌟 關於這個專案
 
